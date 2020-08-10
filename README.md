@@ -1,0 +1,2 @@
+# EventSmash
+Effortless Event Planning
