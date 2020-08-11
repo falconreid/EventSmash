@@ -48,4 +48,4 @@ setTimeout(function () {
 
 let timeDiv = $("<div id='time'></div>");
 $("#mainContent").prepend(timeDiv);
-$("#time").text(moment().format(`dddd,  DD/MM`));
+$("#time").text(moment().format(`dddd,  MM/DD/YY`));
