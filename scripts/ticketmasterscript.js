@@ -92,7 +92,7 @@ return `<div class="card">
 </div>
 </div>`
 }
-///save to local storage
+
 document.addEventListener("click",function(event){
   console.log(event.target)
   if(event.target.classList.contains("gothere")){
