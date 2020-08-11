@@ -158,6 +158,13 @@ header img #header-logo {
 }
 
 /* Sticky Footer */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -168,6 +175,10 @@ main {
   flex: 1 0 auto;
 }
 
+.footer-copyright {
+  vertical-align: middle;
+  padding-bottom: 5px;
+}
 nav img.nav {
   width: 35px;
   height: 35px;
@@ -199,6 +210,8 @@ nav img.nav:hover {
 }
 
 #mainContent {
+  margin-left: 20px;
+  margin-top: 33px;
   border-radius: 5px;
   padding: 10px;
   -webkit-box-shadow: inset 0px 0px 3px 3px rgba(49, 133, 252, 1);
@@ -232,3 +245,38 @@ nav.navFooter {
   background-size: cover;
 }
 
+.collection{
+  display: none;
+}
+
+#piano {
+  display: none;
+}
+
+
+@media screen and (device-width: 280px) and (device-height: 653px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
+  /* h4 {
+    font-size: 1.75rem !important;
+    line-height: 105% !important;
+  } */
+  #mainContent {
+    margin-left: 20px;
+    margin-top: 33px;
+    border-radius: 5px;
+    padding: 10px;
+    /* -webkit-box-shadow: inset 0px 0px 3px 3px rgba(49, 133, 252, 1);
+    -moz-box-shadow: inset 0px 0px 3px 3px rgba(49, 133, 252, 1);
+    box-shadow: inset 0px 0px 3px 3px rgba(49, 133, 252, 1); */
+  }
+}
+
+.eventful-small {
+  position: relative !important;
+  width: 100px !important;
+  font-size: 11px !important;
+  line-height: 11px !important;
+}
+
+#time {
+  text-align: center;
+}
