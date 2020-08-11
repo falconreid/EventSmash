@@ -78,7 +78,7 @@ $("#find-event").on("click", function(event){
     return current}
   
   
-  var queryURL = "https://api.seatgeek.com/2/events?venue.city="+ eventcity + "&venue.state="+ eventstate +  "&taxonomies.name=" + eventlist +/* "&datetime_utc=" + formatdate(dateselector) +  */ "&per_page=3&page="+ page + "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
+  var queryURL = "https://api.seatgeek.com/2/events?venue.city="+ eventcity + "&venue.state="+ eventstate +  "&taxonomies.name=" + eventlist + "&datetime_utc.gt=" + formatdate(dateselector) +   "&per_page=3&page="+ page + "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
 
  console.log(queryURL);
  //Checklist of variables working
@@ -150,7 +150,7 @@ $("#find-event").on("click", function(event){
         return current}
   
   
-        var queryURL = "https://api.seatgeek.com/2/events?venue.city="+ eventcity + "&venue.state="+ eventstate +  "&taxonomies.name=" + eventlist +/* "&datetime_utc=" + formatdate(dateselector) +  */ "&per_page=3&page="+ page + "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
+        var queryURL = "https://api.seatgeek.com/2/events?venue.city="+ eventcity + "&venue.state="+ eventstate +  "&taxonomies.name=" + eventlist + "&datetime_utc.gt=" + formatdate(dateselector) +   "&per_page=3&page="+ page + "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
  
         $.ajax({
           url: queryURL,
@@ -183,4 +183,8 @@ $("#find-event").on("click", function(event){
          eventDetails.append(temp);
        });     
     });
+  });
+    // Clear Events
+    $("#clear-event").on("click", function(){ 
+    $("#event-view").empty();
   });
