@@ -88,7 +88,10 @@ return `<div class="card">
 </div>
 <div class="card-content" id="details">
   <p>${event.info}</p>
+  <div class="card-content" id="dates">
+  <p>${event.dates.start.localDate}</p>
   <button class= "gothere">Save Event!</button>
+</div>
 </div>
 </div>`
 }
