@@ -16,61 +16,61 @@ function showLandingPage() {
   $("#landingPage").attr("style", "display:block;");
 }
 
-//event brite tone
+//ticketmaster tone
 
-const play = document.getElementById("play");
-play.addEventListener("click", () => {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+// const play = document.getElementById("play");
+// play.addEventListener("click", () => {
+//   const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-  const osc = ctx.createOscillator();
-  const amp = ctx.createGain();
+//   const osc = ctx.createOscillator();
+//   const amp = ctx.createGain();
 
-  osc.frequency.value = 200;
-  osc.connect(amp.gain);
+//   osc.frequency.value = 200;
+//   osc.connect(amp.gain);
 
-  const filter = ctx.createBiquadFilter();
+//   const filter = ctx.createBiquadFilter();
 
-  filter.frequency.value = 1250;
+//   filter.frequency.value = 1250;
 
-  osc.connect(filter);
-  filter.connect(ctx.destination);
+//   osc.connect(filter);
+//   filter.connect(ctx.destination);
 
   
 
-  //osc.connect(ctx.destination);
-  osc.start(0);
-  osc.stop(0.5);
-  osc.onended = () => {
-    console.log(ctx.state);
-  };
-});
+//   //osc.connect(ctx.destination);
+//   osc.start(0);
+//   osc.stop(0.5);
+//   osc.onended = () => {
+//     console.log(ctx.state);
+//   };
+// });
 
-//meetup tone
+//SeatGeek tone
 
-const meet = document.getElementById("meet");
-meet.addEventListener("click", () => {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+// const meet = document.getElementById("meet");
+// meet.addEventListener("click", () => {
+//   const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-  const osc = ctx.createOscillator();
-  const amp = ctx.createGain();
+//   const osc = ctx.createOscillator();
+//   const amp = ctx.createGain();
 
-  osc.frequency.value = 250;
-  osc.connect(amp.gain);
+//   osc.frequency.value = 250;
+//   osc.connect(amp.gain);
 
-  const filter = ctx.createBiquadFilter();
+//   const filter = ctx.createBiquadFilter();
 
-  filter.frequency.value = 1250;
+//   filter.frequency.value = 1250;
 
-  osc.connect(filter);
-  filter.connect(ctx.destination);
+//   osc.connect(filter);
+//   filter.connect(ctx.destination);
 
-  //osc.connect(ctx.destination);
-  osc.start(0);
-  osc.stop(0.5);
-  osc.onended = () => {
-    console.log(ctx.state);
-  };
-});
+//   //osc.connect(ctx.destination);
+//   osc.start(0);
+//   osc.stop(0.5);
+//   osc.onended = () => {
+//     console.log(ctx.state);
+//   };
+// });
 
 //calendar tone
 
@@ -78,10 +78,12 @@ const cal = document.getElementById("cal");
 cal.addEventListener("click", () => {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
+  
+
   const osc = ctx.createOscillator();
   const amp = ctx.createGain();
 
-  osc.frequency.value = 300;
+  osc.frequency.value = 150;
   osc.connect(amp.gain);
 
   const filter = ctx.createBiquadFilter();
@@ -108,7 +110,7 @@ listEvents.addEventListener("click", () => {
   const osc = ctx.createOscillator();
   const amp = ctx.createGain();
 
-  osc.frequency.value = 350;
+  osc.frequency.value = 175;
   osc.connect(amp.gain);
 
   const filter = ctx.createBiquadFilter();
@@ -147,11 +149,34 @@ $(document).ready(function () {
 });
 
 //pull user events from local storage array
+console.log( JSON.parse(localStorage.getItem("saveEvent")) );
+
+var getSaveEventList = localStorage.getItem("saveEvent") ?  JSON.parse(localStorage.getItem("saveEvent")) : []  ;
+var string = ""
+//loops through saved events in local storage
+for (let index = 0; index < getSaveEventList.length; index++) {
+ // concatonates html code
+  string +=  `
+  
+  <li class="collection-item avatar">
+<i class="material-icons circle">assignment_ind</i>
+<span class="title">${getSaveEventList[index].name}</span>
+<img src="${getSaveEventList[index].img}">
+<p>time and date <br>
+   meetup or eventbrite
+</p>
+<a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+</li>
+
+  `
+
+
+}
+//ul selector appends string of <li>
+$("#savedEvent").html(string)
 
 //append user events to list view using jquery
     
-
-
 
 
 

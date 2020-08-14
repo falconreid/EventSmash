@@ -1,13 +1,13 @@
-$(document).ready(function(){
-    $('.datepicker').datepicker({});
-    $('input.autocomplete').autocomplete({
-        data: {
-          "concerts": null,
-          "sports": null,
-          "music": null,
-          "comedy": null
-        },
-    });
+$(document).ready(function () {
+  $(".datepicker").datepicker({});
+  $("input.autocomplete").autocomplete({
+    data: {
+      concerts: null,
+      sports: null,
+      music: null,
+      comedy: null,
+    },
+  });
 });
 
 // hide load page
@@ -49,57 +49,178 @@ setTimeout(function () {
   getRandomImage(array, path);
 }, 4000);
 
-
 //SeatGeek Page
 
-$("#find-event").on("click", function(event){
-
+$("#find-event").on("click", function (event) {
   event.preventDefault();
 
   // Here we grab the values from the input fields
   //$("#search-input").prop("required", true);
   var eventlist = $("#search-input").val();
   var eventcity = $("#city-input").val();
-  var eventstate =$("#state-input").val();
-  var dateselector =$("#dateselector").val();
-  var page="1";
+  var eventstate = $("#state-input").val();
+  var dateselector = $("#dateselector").val();
+  var page = "1";
 
   // Here we take Materialize's default dat (MM DD, YYYY) and format it to be YYYY-MM-DD
   // so it can be passed into the queryURL.
-  
-  function formatdate(datestring){
-    var months  = ["jan", "feb" , "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+
+  function formatdate(datestring) {
+    var months = [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep",
+      "oct",
+      "nov",
+      "dec",
+    ];
     var newdate = datestring.replace(",", "").split(" ");
     var year = newdate[2];
     var day = newdate[1];
-    var month = ("0" + (months.indexOf(newdate[0].toLowerCase())+1)).slice(-2);
-    current = year+"-"+month+"-"+day;
+    var month = ("0" + (months.indexOf(newdate[0].toLowerCase()) + 1)).slice(
+      -2
+    );
+    current = year + "-" + month + "-" + day;
     console.log(current);
-    return current}
-  
-  
-  var queryURL = "https://api.seatgeek.com/2/events?venue.city="+ eventcity + "&venue.state="+ eventstate +  "&taxonomies.name=" + eventlist + "&datetime_utc.gt=" + formatdate(dateselector) +   "&per_page=3&page="+ page + "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
+    return current;
+  }
 
- console.log(queryURL);
- //Checklist of variables working
- // - eventcity
- // - eventstate
- // - taxonomies
+  var queryURL =
+    "https://api.seatgeek.com/2/events?venue.city=" +
+    eventcity +
+    "&venue.state=" +
+    eventstate +
+    "&taxonomies.name=" +
+    eventlist +
+    "&datetime_utc.gt=" +
+    formatdate(dateselector) +
+    "&per_page=3&page=" +
+    page +
+    "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
 
- 
+  console.log(queryURL);
+  //Checklist of variables working
+  // - eventcity
+  // - eventstate
+  // - taxonomies
+
   $.ajax({
-      url: queryURL,
-      method: "GET"
-  }).then(function(response){
-  
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    //Log the resulting onject
+    console.log(response);
 
-      //Log the resulting onject
-      console.log(response);
+    var eventDetails = $("#event-view");
 
-       var eventDetails= $("#event-view");
+    let mappedCards = response.events.map((event) => {
+      var temp = `
+              <div class="card">
+                <div class="card-image">
+                  <img src=${event.performers[0].image}>
+                  <span class="card-title">${event.title}</span>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick = "saveEvent('${event.performers[0].image}', '${event.description}')><i class="material-icons">Save!</i></a>
+                </div>
+                <div class="card-content">
+                  <p>${event.description}</p>
+                  <p>Category: ${event.type}</p>
+                  <p>Average Price: $${event.stats.average_price}</p>
+                  <p>Location: ${event.venue.address}</p>
+                  <p align="right">${event.venue.extended_address}</p>
+                </div>
+                <div class="card-action">
+                  <a href=${event.venue.url}>View Details</a>
+              </div>
+            </div>
+          </div>`;
+          var saveEventList = [];
 
-       let mappedCards = response.events.map(event => {
-         var temp =`
+function saveEvent(img, name, info) {
+  console.log(img, name, info);
+  var saveEvent = {
+    img: img,
+    name: name,
+    info: info,
+  };
+
+  saveEventList.push(saveEvent);
+  localStorage.setItem("saveEvent", JSON.stringify(saveEventList));
+}
+
+      eventDetails.append(temp);
+      //save events to local storage
+
+    });
+  });
+});
+
+
+
+//Load More Events Button
+$(".load-more-button").on("click", function () {
+  event.preventDefault();
+
+  var eventlist = $("#search-input").val();
+  var eventcity = $("#city-input").val();
+  var eventstate = $("#state-input").val();
+  var dateselector = $("#dateselector").val();
+  var page = "2";
+
+  // Here we take Materialize's default dat (MM DD, YYYY) and format it to be YYYY-MM-DD
+  // so it can be passed into the queryURL.
+
+  function formatdate(datestring) {
+    var months = [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep",
+      "oct",
+      "nov",
+      "dec",
+    ];
+    var newdate = datestring.replace(",", "").split(" ");
+    var year = newdate[2];
+    var day = newdate[1];
+    var month = ("0" + (months.indexOf(newdate[0].toLowerCase()) + 1)).slice(
+      -2
+    );
+    current = year + "-" + month + "-" + day;
+    return current;
+  }
+
+  var queryURL =
+    "https://api.seatgeek.com/2/events?venue.city=" +
+    eventcity +
+    "&venue.state=" +
+    eventstate +
+    "&taxonomies.name=" +
+    eventlist +
+    "&datetime_utc.gt=" +
+    formatdate(dateselector) +
+    "&per_page=3&page=" +
+    page +
+    "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
+
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    var eventDetails = $("#event-view");
+
+    let mappedCards = response.events.map((event) => {
+      var temp = `
               <div class="card">
                 <div class="card-image">
                   <img src=${event.performers[0].image}>
@@ -119,72 +240,11 @@ $("#find-event").on("click", function(event){
             </div>
           </div>`;
 
-         eventDetails.append(temp);
-       });     
+      eventDetails.append(temp);
     });
   });
-
-   
-
-    //Load More Events Button
-    $(".load-more-button").on("click", function(){
-      event.preventDefault();
-
-      var eventlist = $("#search-input").val();
-      var eventcity = $("#city-input").val();
-      var eventstate =$("#state-input").val();
-      var dateselector =$("#dateselector").val();
-      var page= "2";
-    
-    
-      // Here we take Materialize's default dat (MM DD, YYYY) and format it to be YYYY-MM-DD
-      // so it can be passed into the queryURL.
-  
-      function formatdate(datestring){
-        var months  = ["jan", "feb" , "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
-        var newdate = datestring.replace(",", "").split(" ");
-        var year = newdate[2];
-        var day = newdate[1];
-        var month = ("0" + (months.indexOf(newdate[0].toLowerCase())+1)).slice(-2);
-        current = year+"-"+month+"-"+day;
-        return current}
-  
-  
-        var queryURL = "https://api.seatgeek.com/2/events?venue.city="+ eventcity + "&venue.state="+ eventstate +  "&taxonomies.name=" + eventlist + "&datetime_utc.gt=" + formatdate(dateselector) +   "&per_page=3&page="+ page + "&client_id=MjEyNDUyODZ8MTU5NjkxNDAwNi40OQ";
- 
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function(response){
-
-        var eventDetails= $("#event-view");
-
-        let mappedCards = response.events.map(event => {
-          var temp =`
-              <div class="card">
-                <div class="card-image">
-                  <img src=${event.performers[0].image}>
-                  <span class="card-title">${event.title}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                </div>
-                <div class="card-content">
-                  <p>${event.description}</p>
-                  <p>Category: ${event.type}</p>
-                  <p>Average Price: $${event.stats.average_price}</p>
-                  <p>Location: ${event.venue.address}</p>
-                  <p align="right">${event.venue.extended_address}</p>
-                </div>
-                <div class="card-action">
-                  <a href=${event.venue.url}>View Details</a>
-              </div>
-            </div>
-          </div>`;
-
-         eventDetails.append(temp);
-       });     
-    });
-  });
-    // Clear Events
-    $("#clear-event").on("click", function(){ 
-    $("#event-view").empty();
-  });
+});
+// Clear Events
+$("#clear-event").on("click", function () {
+  $("#event-view").empty();
+});
