@@ -170,6 +170,7 @@ for (let index = 0; index < getSaveEventList.length; index++) {
 
 <a href="${getSaveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
 </li>
+<br>
 
   `
 
