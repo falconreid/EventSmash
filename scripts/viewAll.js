@@ -150,8 +150,11 @@ $(document).ready(function () {
 
 //pull user events from local storage array
 console.log( JSON.parse(localStorage.getItem("saveEvent")) );
+console.log( JSON.parse(localStorage.getItem("seatEvent")) );
 
+//ticketmaster saved event
 var getSaveEventList = localStorage.getItem("saveEvent") ?  JSON.parse(localStorage.getItem("saveEvent")) : []  ;
+console.log(getSaveEventList)
 var string = ""
 //loops through saved events in local storage
 for (let index = 0; index < getSaveEventList.length; index++) {
@@ -160,13 +163,14 @@ for (let index = 0; index < getSaveEventList.length; index++) {
   
   <li class="collection-item avatar">
 <i class="material-icons circle">assignment_ind</i>
-<span class="title">${getSaveEventList[index].name}</span>
+<h1 class="title">${getSaveEventList[index].name}</h1>
 <img src="${getSaveEventList[index].img}">
-<p>time and date <br>
-   meetup or eventbrite
+<p>${getSaveEventList[index].info}"
 </p>
-<a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+
+<a href="${getSaveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
 </li>
+<br>
 
   `
 
@@ -174,6 +178,35 @@ for (let index = 0; index < getSaveEventList.length; index++) {
 }
 //ul selector appends string of <li>
 $("#savedEvent").html(string)
+
+
+
+//seatgeek saved event
+var saveEventList = localStorage.getItem("seatEvent") ?  JSON.parse(localStorage.getItem("seatEvent")) : []  ;
+console.log(saveEventList)
+var string = ""
+//loops through saved events in local storage
+for (let index = 0; index < saveEventList.length; index++) {
+ // concatonates html code
+  string +=  `
+  
+  <li class="collection-item avatar">
+<i class="material-icons circle">assignment_ind</i>
+<span class="title">${saveEventList[index].title}</span>
+<br>
+<img src="${saveEventList[index].img}">
+<p>${saveEventList[index].description}
+</p>
+<a href="${saveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+</li>
+<br>
+
+  `
+
+
+}
+//ul selector appends string of <li>
+$("#seatEvent").html(string)
 
 //append user events to list view using jquery
     

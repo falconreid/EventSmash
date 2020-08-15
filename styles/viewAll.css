@@ -253,6 +253,10 @@ nav.navFooter {
   display: none;
 }
 
+.events {
+  text-align: center;
+}
+
 
 @media screen and (device-width: 280px) and (device-height: 653px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
   /* h4 {

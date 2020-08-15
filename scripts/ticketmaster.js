@@ -92,16 +92,16 @@ return `<div class="card">
 </div>
 <div class="card-content" id="details">
   <p>${event.info}</p>
-  <button class= "gothere" onClick = "saveEvent('${event.images[0].url}', '${event.name}', '${event.info}' )">Save Event!</button>
+  <button class= "gothere" onClick = "saveEvent('${event.images[0].url}', '${event.name}', '${event.info}', '${event.url}' )">Save Event!</button>
 </div>
 </div>`
 }
 var saveEventList = []
 
-function saveEvent(img, name, info) {
-  console.log(img, name, info)
+function saveEvent(img, name,info, url) {
+  console.log(img, name,info, url)
   var saveEvent= {
-    img: img, name: name, info: info
+    img: img, name: name, info: info, url: url
   }
   
   saveEventList.push(saveEvent);
