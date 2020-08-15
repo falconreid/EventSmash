@@ -115,52 +115,88 @@ $("#find-event").on("click", function (event) {
     method: "GET",
   }).then(function (response) {
     //Log the resulting onject
+    
+    var events= response.events
     console.log(response);
+    for (i = 0; i < events.length; i++) {
+      var event = events[i]
+      var card = generateCard(event)
 
-    var eventDetails = $("#event-view");
+      localStorage.setItem("event", JSON.stringify(event));
+      console.log(event);
+      $("#event-view").append(card);
+    }
 
-    let mappedCards = response.events.map((event) => {
-      var temp = `
-              <div class="card">
-                <div class="card-image">
-                  <img src=${event.performers[0].image}>
-                  <span class="card-title">${event.title}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick = "saveEvent('${event.performers[0].image}', '${event.description}')><i class="material-icons">Save!</i></a>
-                </div>
-                <div class="card-content">
-                  <p>${event.description}</p>
-                  <p>Category: ${event.type}</p>
-                  <p>Average Price: $${event.stats.average_price}</p>
-                  <p>Location: ${event.venue.address}</p>
-                  <p align="right">${event.venue.extended_address}</p>
-                </div>
-                <div class="card-action">
-                  <a href=${event.venue.url}>View Details</a>
-              </div>
-            </div>
-          </div>`;
-          var saveEventList = [];
+    // var eventDetails = $("#event-view");
 
-function saveEvent(img, name, info) {
-  console.log(img, name, info);
-  var saveEvent = {
-    img: img,
-    name: name,
-    info: info,
-  };
+    // let mappedCards = response.events.map((event) => {
+    //   var temp = `
+    //           <div class="card">
+    //             <div class="card-image">
+    //               <img src=${event.performers[0].image}>
+    //               <span class="card-title">${event.title}</span>
+    //               <button class="btn-floating halfway-fab waves-effect waves-light red" onClick = "saveEvent(${event.performers[0].image}, ${event.description} )"><i class="material-icons">Save!</i></button>
+    //             </div>
+    //             <div class="card-content">
+    //               <p>${event.description}</p>
+    //               <p>Category: ${event.type}</p>
+    //               <p>Average Price: ${event.stats.average_price}</p>
+    //               <p>Location: ${event.venue.address}</p>
+    //               <p align="right">${event.venue.extended_address}</p>
+    //             </div>
+    //             <div class="card-action">
+    //               <a href=${event.venue.url}>View Details</a>
+    //           </div>
+    //         </div>
+    //       </div>`
 
-  saveEventList.push(saveEvent);
-  localStorage.setItem("saveEvent", JSON.stringify(saveEventList));
-}
+   // var eventDetails = $("#event-view");
+    
 
-      eventDetails.append(temp);
-      //save events to local storage
+    
 
-    });
+    //eventDetails.append(temp);
+    
   });
 });
 
+function generateCard(event) {
+  return `<div class="card">
+  <div class="card-image">
+               <img src=${event.performers[0].image}>
+               <span class="card-title">${event.title}</span>
+               <button class="btn-floating halfway-fab waves-effect waves-light red" onClick = "seatEvent('${event.performers[0].image}', '${event.title}', '${event.type}' )"><i class="material-icons">Save!</i></button>
+             </div>
+             <div class="card-content">
+               <p>${event.description}</p>
+               <p>Category: ${event.type}</p>
+               <p>Average Price: ${event.stats.average_price}</p>
+               <p>Location: ${event.venue.address}</p>
+               <p align="right">${event.venue.extended_address}</p>
+             </div>
+             <div class="card-action">
+               <a href=${event.venue.url}>View Details</a>
+           </div>
+         </div>
+       </div>`;
+}
 
+//save events to local storage
+var saveEventList = [];
+
+    function seatEvent(img, title, description, type) {
+      console.log(img, title, description, type)
+      var seatEvent = {
+        img: img,
+        title: title,
+        description: description,
+        type: type,
+
+      };
+
+      saveEventList.push(seatEvent);
+      localStorage.setItem("seatEvent", JSON.stringify(saveEventList));
+    };
 
 //Load More Events Button
 $(".load-more-button").on("click", function () {
