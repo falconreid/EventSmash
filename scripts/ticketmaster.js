@@ -98,10 +98,10 @@ return `<div class="card">
 }
 var saveEventList = []
 
-function saveEvent(img, name, info) {
-  console.log(img, name, info)
+function saveEvent(img, name, url) {
+  console.log(img, name, url)
   var saveEvent= {
-    img: img, name: name, info: info
+    img: img, name: name, url: url
   }
   
   saveEventList.push(saveEvent);

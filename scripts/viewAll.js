@@ -166,6 +166,7 @@ for (let index = 0; index < getSaveEventList.length; index++) {
 <img src="${getSaveEventList[index].img}">
 <p>${getSaveEventList[index].info}"
 </p>
+
 <a href="${getSaveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
 </li>
 
