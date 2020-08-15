@@ -152,6 +152,7 @@ $(document).ready(function () {
 console.log( JSON.parse(localStorage.getItem("saveEvent")) );
 console.log( JSON.parse(localStorage.getItem("seatEvent")) );
 
+//ticketmaster saved event
 var getSaveEventList = localStorage.getItem("saveEvent") ?  JSON.parse(localStorage.getItem("saveEvent")) : []  ;
 console.log(getSaveEventList)
 var string = ""
@@ -197,6 +198,7 @@ for (let index = 0; index < saveEventList.length; index++) {
 </p>
 <a href="${saveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
 </li>
+<br>
 
   `
 

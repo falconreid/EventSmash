@@ -165,7 +165,7 @@ function generateCard(event) {
   <div class="card-image">
                <img src=${event.performers[0].image}>
                <span class="card-title">${event.title}</span>
-               <button class="btn-floating halfway-fab waves-effect waves-light red" onClick = "seatEvent('${event.performers[0].image}', '${event.title}', '${event.type}' )"><i class="material-icons">Save!</i></button>
+               <button class="btn-floating halfway-fab waves-effect waves-light red" onClick = "seatEvent('${event.performers[0].image}', '${event.title}', '${event.type}' , '${event.url}' )"><i class="material-icons">Save!</i></button>
              </div>
              <div class="card-content">
                <p>${event.description}</p>
@@ -186,6 +186,7 @@ var saveEventList = [];
 
     function seatEvent(img, title, description, url) {
       console.log(img, title, description, url)
+
       var seatEvent = {
         img: img,
         title: title,
