@@ -184,13 +184,13 @@ function generateCard(event) {
 //save events to local storage
 var saveEventList = [];
 
-    function seatEvent(img, title, description, type) {
-      console.log(img, title, description, type)
+    function seatEvent(img, title, description, url) {
+      console.log(img, title, description, url)
       var seatEvent = {
         img: img,
         title: title,
         description: description,
-        type: type,
+        url: url,
 
       };
 

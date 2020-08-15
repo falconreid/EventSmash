@@ -162,12 +162,11 @@ for (let index = 0; index < getSaveEventList.length; index++) {
   
   <li class="collection-item avatar">
 <i class="material-icons circle">assignment_ind</i>
-<span class="title">${getSaveEventList[index].name}</span>
+<h1 class="title">${getSaveEventList[index].name}</h1>
 <img src="${getSaveEventList[index].img}">
-<p>time and date <br>
-   meetup or eventbrite
+<p>${getSaveEventList[index].info}"
 </p>
-<a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+<a href="${getSaveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
 </li>
 
   `
@@ -190,12 +189,12 @@ for (let index = 0; index < saveEventList.length; index++) {
   
   <li class="collection-item avatar">
 <i class="material-icons circle">assignment_ind</i>
-<span class="title">${saveEventList[index].name}</span>
+<span class="title">${saveEventList[index].title}</span>
+<br>
 <img src="${saveEventList[index].img}">
-<p>time and date <br>
-   meetup or eventbrite
+<p>${saveEventList[index].description}
 </p>
-<a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+<a href="${saveEventList[index].url}" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
 </li>
 
   `
